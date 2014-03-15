@@ -1,0 +1,46 @@
+	<section id="info">
+
+			<header>
+		 		<h1><a href="#">Appetite</a></h1>
+				<h2>London's best places</h2>
+		  	</header>
+
+		  	<!-- this is the search form -->
+
+		  	<form action="/" method="get"> 
+		  		<input type="text" name="search">
+
+		  	</form>	
+
+
+
+			<ul>
+				<% @carribeans.each do |carribean| %>
+	
+				<li data-lat="<%= carribean.latitude %>" data-lng="<%= carribean.longitude %>">
+		     		<h3><%= carribean.name %></h3>
+		        	<p><%= carribean.address %></p>
+		        	<!-- if there is a search calculate how far formt the search the carribean is -->
+
+		        	<% if params[:search].present? %>
+
+		        		<p> 
+		        			<%= carribean.distance_to(params[:search]).round(1) %>
+		        			 km away
+		        		</p>	
+		        		
+		        	<% end %>
+
+		      	</li>
+		      	<% end %>
+		  	</ul>
+
+
+		</section>
+
+		<section id="map"></section>
+
+		<!-- <a href="newstore.html" class="button">Add a location</a> -->
+		<%= link_to "add a location", new_carribean_path, class: "button" %>
+
+		
